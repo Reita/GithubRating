@@ -1,0 +1,14 @@
+@mixin nflix-fade-in {
+    animation-name: fadeIn;
+    animation-duration: 0.75s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+  
+    to {
+        opacity: 1;
+    }
+}

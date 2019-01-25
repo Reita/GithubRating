@@ -1,0 +1,9 @@
+$nflix-layout__max: 1200px;
+
+@mixin nflix-host($foreground, $background) {
+    color: $foreground;
+    background: $background;
+    display: block;
+    padding: 0;
+    height: auto;
+}

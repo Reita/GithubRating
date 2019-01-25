@@ -1,0 +1,144 @@
+@import 'styles/colors';
+@import 'styles/layout';
+@import 'styles/typography';
+@import 'styles/animation';
+@import 'styles/forms';
+
+$nflix-commint__link--width: 70px;
+
+:host {
+    @include nflix-host($nflix-white, $nflix-white);
+}
+
+.nflix-intro__header-content {
+    @include nflix-fade-in;
+    transform: rotate(0.05deg);
+}
+
+.nflix-intro__name {
+    margin: 0;
+    padding: 0;
+}
+
+.nflix-intro__main {
+    background: $nflix-white;
+}
+
+.nflix-intro__error {
+    max-width: $nflix-layout__max;
+    padding: 30px;
+}
+
+.nflix-intro__caption {
+    @include text-body-subtitle;
+    margin: 0 0 20px 0;
+    text-align: left;
+}
+
+.nflix-intro__table {
+    @include text-body;
+    @include nflix-fade-in;
+    border-collapse: collapse;
+    max-width: $nflix-layout__max;
+    color: $nflix-black;
+    margin: 30px auto;
+    padding: 0;
+    width: 100%;
+}
+
+.nflix-intro__table-cell {
+    padding: 0.25rem;
+    text-align: right;
+    border: 1px solid $nflix-gray-2;
+    cursor: pointer;
+
+    &.nflix-intro__table-cell_selected {
+        text-decoration: underline;
+        position: relative;
+        padding: 0 25px 0 0;
+
+        border: 0;
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%); // Old school centering given we don't have a flex container
+            border-bottom: 7px solid $nflix-black;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+        }
+    }
+
+    &.nflix-intro__table-cell_ascending-sort {
+        &::after {
+            content: '';
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%); // Old school centering given we don't have a flex container
+            border-bottom: 0;
+            border-top: 7px solid $nflix-black;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+        }   
+    }
+}
+
+.nflix-intro__table-row {
+    &:nth-child(odd) {
+        background: $nflix-gray;
+    }
+}
+
+// Encapsulate me in another component
+.nflix-commit__container {
+    @include text-body;
+    box-sizing: border-box;
+    padding: 100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba($nflix-black, 0.9);
+    color: $nflix-white;
+    margin: 0;
+    overflow: scroll;
+}
+
+.nflix-commit__item-container {
+    position: relative;
+    padding: 0 0 20px;
+    max-width: $nflix-layout__max;
+}
+
+.nflix-commit__link {
+    display: inline-block;
+    min-width: $nflix-commint__link--width;
+    text-align: center;
+    background-color: $nflix-white;
+    color: $nflix-blue;
+    padding: 6px 12px;
+    margin: 0 20px;
+    border-radius: 2px;
+    text-decoration: none;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.nflix-commit__close {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: 0;
+    border: 0;
+    color: $nflix-white;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+}

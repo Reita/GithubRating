@@ -1,20 +1,53 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<header class="nflix-container">
+  <div class="nflix-intro__header-content">
+      <h1 class="nflix-intro__name nflix-text-big-title" [innerText]="title"></h1>
+      <span class="nflix-line-break"></span>
+      <input
+        [formControl]="organizationName"
+        class="nflix-input-text"
+        placeholder="Enter organization: eg Netflix"
+        autocomplete="off"
+        type="text"
+        id="organizationName"
+        name="organizationName" />
+        <div class="nflix-select-container">
+          <select class="nflix-select" [formControl]="columnName">
+            <option [selected]="currentSort == columnName" *ngFor="let columnName of getColumnNames()" [innerText]="columnName"></option>
+          </select>
+      </div>
+  </div>
+</header>
+<!-- NOTE:
+  This table implementation is partially ADA compliant; while the table structure will get reported properly
+  users have no way to interact/focus table cells nor I am implementing aria-sort.
+-->
+<main class="nflix-intro__main">
+    <h2 class="nflix-intro__error nflix-text-mono nflix-black" *ngIf="networkError && !!organizationName.value" [innerText]="networkError"></h2>
+    <!-- It would be nice to have a spinner while we retrieve data -->
+    <table *ngIf="!networkError" class="nflix-intro__table">
+        <caption class="nflix-intro__caption">Search Filter: {{ organizationName.value || 'Netflix'}}</caption>
+        <tr class="nflix-intro__table-row nflix-intro__table-cell">
+          <th
+            [class.nflix-intro__table-cell_selected]="currentSort == columnName"
+            [class.nflix-intro__table-cell_ascending-sort]="currentSort == columnName && ascendingSortingOrder"
+            class="nflix-intro__table-cell"
+            (click)="sortHeader(columnName)"
+            *ngFor="let columnName of getColumnNames()"
+            [innerText]="columnName"></th>
+        </tr>
+        <tr class="nflix-intro__table-row nflix-intro__table-cell" *ngFor="let repo of organizationRepos">
+          <td (click)="getRepoCommits(repo['name'])"  class="nflix-intro__table-cell" *ngFor="let columnName of getColumnNames()" [innerText]="repo[columnName]"></td>
+        </tr>
+      </table>
 
+    <!-- Move this to its own component -->
+    <ol *ngIf="repoCommits.length > 0" class="nflix-black nflix-commit__container">
+      <h2 class="nflix-text-body-subtitle" [innerHTML]="selectedRepoName"></h2>
+      <button (click)="dismissRepoCommmits()" class="nflix-commit__close nflix-text-body-subtitle-italic" type="button">Close results</button>
+      <li class="nflix-commit__item-container" *ngFor="let commit of repoCommits">
+          <span class="nflix-block nflix-text-body-subtitle-italic nflix-text-body-subtitle-italic_small">{{ getMessageTitle(commit.message) }}</span>
+          <small><strong [innerHTML]="commit.authorUsername"></strong> authored and <strong [innerHTML]="commit.commiterUsername"></strong> committed on {{ dateParser(commit.author.date) }}</small>
+          <a class="nflix-commit__link" [href]="commit.commitUrl" [innerText]="commit.sha"></a>
+      </li>
+    </ol>
+</main>

@@ -1,0 +1,40 @@
+/*
+    Helper breakpoints; though I didn't really end up implementing this.
+*/
+
+@mixin breakpoint($class) {
+    @if $class == xl {
+        @media screen
+        and (min-width: 70em) { @content ; }
+     }
+      @else if $class == lg {
+        @media screen
+        and (min-width: 64em) { @content ; }
+     }
+       @else if $class == md {
+        @media screen
+        and (min-height: 400px)
+        and (min-width: 601px) { @content ; }
+     }
+      @else if $class == sm {
+        @media screen
+        and (min-width: 37.5em)  { @content ; }
+     }
+     @else if $class == xs {
+        @media screen
+        and (max-width: 37.5em)  { @content ; }
+        @include landscape {
+            @content;
+        }
+     }
+    @else {
+        @warn "Breakpoint mixin supports: xs, sm, md, lg";
+    }
+}
+
+@mixin landscape {
+    @media screen
+        and (min-width: 481px) and (max-width: 812px) {
+        @content;
+    }
+}

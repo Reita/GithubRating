@@ -1,0 +1,59 @@
+$nflix-form-height: 36px;
+
+@mixin nflix-form-element {
+    @include text-body-subtitle-italic;
+    display: inline-block;
+    font-size: 1.2rem;
+    color: $nflix-white;
+    background: $nflix-red;
+    border: 1px solid $nflix-white;
+    padding: 5px 10px;
+    transition: box-shadow 300ms;
+    width: 50%;
+    margin: 35px 10px 0;
+    height: $nflix-form-height;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0.2rem 0.8rem 1.6rem rgba($nflix-black, 0.5);
+    }    
+}
+
+.nflix-input-text {
+    @include nflix-form-element;
+
+    &::placeholder {
+        color: $nflix-white;
+    }
+}
+
+.nflix-select {
+    @include nflix-form-element;
+    height: $nflix-form-height + 12px; // Hand tuning this since custom form elements are hard
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    width: calc(50% - 50px);
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.nflix-select-container {
+    /*
+        We need this extra markup element because selects can't display pseudo-elements.
+    */
+    position: relative;
+    display: inline;
+      
+    &::after {
+        content: '';
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%); // Old school centering given we don't have a flex container
+        border-top: 7px solid $nflix-white;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+    }
+}

@@ -1,0 +1,12 @@
+@import '../responsive';
+@import '../layout';
+
+.nflix-container {
+    background: $nflix-red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--root-height);
+    margin: 0 auto;
+    padding: 0;
+}

@@ -1,0 +1,19 @@
+/* Core */
+@import 'app/styles/typography';
+@import 'app/styles/normalize';
+@import 'app/styles/colors';
+@import 'app/styles/responsive';
+@import 'app/styles/atoms';
+
+/* Components */
+@import 'app/styles/components/line-break';
+@import 'app/styles/components/container';
+
+/* Rooot variablrs */
+:root {
+    --root-height: 260px;
+}
+
+.nflix-no-scroll {
+    overflow: hidden;
+}

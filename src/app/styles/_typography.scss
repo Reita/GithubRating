@@ -1,0 +1,62 @@
+@mixin text-big-title {
+    @include text-body-subtitle;
+    font-size: 4rem;
+    line-height: 1;
+}
+
+@mixin text-body {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@mixin text-body-mono {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+@mixin text-body-subtitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.25rem;
+    line-height: 1;
+}
+
+@mixin text-body-subtitle-black {
+    @include text-body-subtitle;
+}
+
+@mixin text-body-subtitle-italic {
+    @include text-body-subtitle;
+    font-style: italic;
+}
+
+.nflix-text-big-title {
+    @include text-big-title;
+}
+
+.nflix-text-body {
+    @include text-body;
+}
+
+.nflix-text-body-subtitle {
+    @include text-body-subtitle;
+}
+
+.nflix-text-body-subtitle-black {
+    @include text-body-subtitle-black;
+}
+
+.nflix-text-body-subtitle-italic {
+    @include text-body-subtitle-italic;
+
+    &.nflix-text-body-subtitle-italic_small {
+        font-size: 1rem;
+    }
+}
+
+.nflix-text-mono {
+    @include text-body-mono;
+}
