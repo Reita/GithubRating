@@ -5,7 +5,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Technical Considerations
 While using Angular might seem overkill for a project such as this I decided to use it on the basis that everything is already built-in; the HttpClient makes consuming services relatively straight forward and combined with RxJS makes consuming date streams ideal.
 
-Using Typescript to generate a partial Github model response to be consumed by the app also helped me reduce the overall complexity of my model. I am aware I could have gotten the GitHub API schema and convert it to TypeScript through json-schema-to-typescript or simular which would have made things even easier but for the purpose of this demo it didn't seem worth the time.
+Using Typescript to generate a partial Github model response to be consumed by the app also helped me reduce the overall complexity of my model. I am aware I could have gotten the GitHub API schema and convert it to TypeScript through json-schema-to-typescript or similar which would have made things even easier but for the purpose of this demo it didn't seem worth the time.
 
 Angular CLI schematics allow me to use SASS instead of CSS which really helped in avoiding CSS repetition. And even though this is a fairly simple project I like to keep my SASS partials and (S)CSS folder/file structure separate which makes handling complex sites easier. I decided on using BEM for my naming methodology although I only have one component.
 
